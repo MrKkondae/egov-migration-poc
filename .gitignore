@@ -20,3 +20,18 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# Embedding cache
+.cache/
