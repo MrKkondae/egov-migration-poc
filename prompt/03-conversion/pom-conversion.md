@@ -105,4 +105,3 @@ eGovFrame 4.3 RTE dependency를 사용하는 경우 version property는 반드�
 ## 답변 언어
 - 모든 설명은 한국어로 작성한다.
 - 단, XML tag, groupId, artifactId, version, 파일명은 원문 그대로 유지한다.
-```
