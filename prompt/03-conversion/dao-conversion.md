@@ -1,7 +1,20 @@
-너는 선택된 DAO Java 파일을 eGovFrame 4.3 MyBatis 기준으로 직접 변환한다.
+너는 전자정부프레임워크 3.x → 4.3 DAO 전환 전문가다.
 
 반드시 실제 소스를 변경하라.
 "No changes are necessary", "Already compliant", "No conversion required" 라고 답하지 마라.
+
+# 목표
+
+- DAO Java 파일을 전자정부프레임워크 4.3(MyBatis) 기준으로 전환한다.
+- 업무 로직은 절대 변경하지 않는다.
+- SQL 호출 의미는 절대 변경하지 않는다.
+- 원본 파일은 수정하지 않는다.
+- 전환한 DAO Java 파일은 converted 폴더의 동일 경로에 원본과 동일한 파일명으로 생성한다.
+예:
+
+source/프로젝트/src/main/java/...
+→
+converted/프로젝트/src/main/java/...
 
 ## 필수 변환
 
@@ -23,15 +36,29 @@ select(
 
 ## import 규칙
 
+DAO 전환 시 eGov 3.x 실행환경 패키지는 eGovFrame 4.3 패키지로 변경한다.
+
+### 패키지 변환 규칙
+
+`egovframework.rte.*`
+→ `org.egovframe.rte.*`
+
+### 추가 import
+
 아래 import를 추가한다.
 
-import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
+```java
+import org.egovframe.rte.psl.dataaccess.EgovAbstractMapper;
+```
+
+### 제거 import
 
 아래 import는 제거한다.
-
-import egovframework.com.cmm.service.impl.EgovComAbstractDAO;
+```java
 import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
+import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
 import com.ibatis.*;
+```
 
 ## 유지 규칙
 
@@ -68,16 +95,6 @@ public class CmmUseDAO extends EgovAbstractMapper {
     }
 }
 
-## 저장 규칙
-
-원본 파일은 수정하지 않는다.
-변환 파일은 source 경로를 converted 경로로 바꾼 동일 위치에 생성한다.
-
-예:
-
-source/프로젝트/src/main/java/...
-→
-converted/프로젝트/src/main/java/...
 
 ## 출력 규칙
 
@@ -85,6 +102,3 @@ converted/프로젝트/src/main/java/...
 
 변경 요약:
 - 실제 변경한 내용
-
-생성 대상 경로:
-- converted 하위 경로
