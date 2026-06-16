@@ -1,4 +1,3 @@
-```md
 eGovFrame 3.1 pom.xml을 eGovFrame 4.3 기준 pom.xml 후보로 변환하라.
 
 ## 목표
@@ -70,10 +69,30 @@ eGovFrame 3.1 pom.xml을 eGovFrame 4.3 기준 pom.xml 후보로 변환하라.
 - 기존의 `<egovframework.rte.version>` 를 그대로 유지하지 말고, `org.egovframe.rte` 좌표를 쓰는 경우에는 property 명도 함께 정리하라.
 - version이 확실하지 않은 dependency는 임의 버전 지정 금지, `TODO` 주석으로 남겨라.
 
+## eGov RTE version property 절대 규칙
+
+eGovFrame 4.3 RTE dependency를 사용하는 경우 version property는 반드시 아래 이름만 사용한다.
+
+```xml
+<org.egovframe.rte.version>4.3.0</org.egovframe.rte.version>
+```
+
 ## repository 규칙
 - eGov dependency 확인 및 사용 시 eGovFrame 공식 Maven 저장소를 우선 고려하라.
 - Maven Central만 보고 eGov 좌표 존재를 단정하지 마라.
 - 공식 저장소 또는 공식 샘플 POM으로 확인되지 않은 eGov 좌표는 생성하지 마라.
+
+## 변환 후 자체 검증 규칙
+
+최종 `pom.xml` 출력 전에 반드시 다음 항목을 자체 검증하라.
+
+- `${egovframework.rte.version}` 문자열이 남아 있으면 실패다.
+- `<groupId>egovframework.rte</groupId>`가 남아 있으면 실패다.
+- `<artifactId>egovframework.rte.`로 시작하는 artifactId가 남아 있으면 실패다.
+- `org.egovframe.rte` groupId와 `egovframework.rte.*` artifactId가 혼용되면 실패다.
+- eGov RTE dependency의 version은 모두 `${org.egovframe.rte.version}`를 사용해야 한다.
+
+위 조건을 만족하지 못하면 `pom.xml`을 출력하지 말고 오류 원인을 먼저 설명하라.
 
 ## 출력 규칙
 다음 순서로 출력하라.
